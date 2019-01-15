@@ -6,6 +6,6 @@
 <body>
 <h1>banking system</h1>
 <h2>Welcome to HWJ Banking</h2>
-<a href="ProductController?action=queryAll">check all users</a>
+Hello world
 </body>
 </html>

@@ -5,9 +5,9 @@ import com.hwj.banking.Entity.Product;
 import com.hwj.banking.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImp implements ProductService {
@@ -16,8 +16,27 @@ public class ProductServiceImp implements ProductService {
     ProductDao productDao;
 
     @Override
-    @Transactional
-    public List<Product> getProduct() {
-        return productDao.getProduct();
+    public void addProduct(Product product) {
+        productDao.save(product);
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+        productDao.save(product);
+    }
+
+    @Override
+    public Optional<Product> getProduct(int id) {
+        return productDao.findById(id);
+    }
+
+    @Override
+    public List<Product> getAllProduct() {
+        return (List<Product>) productDao.findAll();
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        productDao.deleteById(id);
     }
 }

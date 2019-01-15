@@ -3,18 +3,18 @@ package com.hwj.banking.Entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "product")
+@Table(name = "PRODUCTS")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private int pid;
 
-    @Column(name = "name")
+    @Column(name = "PNAME")
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "PRICE")
     private double price;
 
 

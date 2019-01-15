@@ -39,10 +39,16 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
         <!-- oracle -->
+        <!--<dependency>-->
+            <!--<groupId>com.oracle</groupId>-->
+            <!--<artifactId>ojdbc14</artifactId>-->
+            <!--<version>10.2.0.4.0</version>-->
+        <!--</dependency>-->
+
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>10.2.0.4.0</version>
+            <groupId>localjar</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>14</version>
         </dependency>
     </dependencies>
 

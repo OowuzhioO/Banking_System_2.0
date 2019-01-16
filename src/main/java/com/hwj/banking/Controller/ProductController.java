@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @PutMapping("/updateProduct")
-    public String updateProduct(@RequestBody ProductParam productParam){
+    public String updateProduct(ProductParam productParam){
         System.out.println("contorller uodate pid : " + productParam.getPid());
         productService.updateProduct(productParam);
         return "update Product successfully";

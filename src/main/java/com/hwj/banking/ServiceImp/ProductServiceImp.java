@@ -2,6 +2,7 @@ package com.hwj.banking.ServiceImp;
 
 import com.hwj.banking.Dao.ProductDao;
 import com.hwj.banking.Entity.Product;
+import com.hwj.banking.Param.ProductParam;
 import com.hwj.banking.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,14 +17,20 @@ public class ProductServiceImp implements ProductService {
     ProductDao productDao;
 
     @Override
-    public void addProduct(Product product) {
+    public void addProduct(ProductParam productParam) {
+        Product product = new Product();
+        product.setName(productParam.getName());
+        product.setPrice(productParam.getPrice());
         productDao.save(product);
     }
 
     @Override
-    public void updateProduct(Product product) {
-        Product product1 = productDao.save(product);
-        System.out.println("ServiceImp update pid: " + product1.getPid());
+    public void updateProduct(ProductParam productParam) {
+        Product product = new Product();
+        product.setPid(productParam.getPid());
+        product.setName(productParam.getName());
+        product.setPrice(productParam.getPrice());
+        productDao.save(product);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.hwj.banking.Controller;
 
 import com.hwj.banking.Entity.Product;
+import com.hwj.banking.Param.ProductParam;
 import com.hwj.banking.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,27 +26,17 @@ public class ProductController {
     }
 
 //    @PostMapping("/addProduct")
-//    @RequestMapping
-//    public ModelAndView addProduct(HttpServletRequest request,
-//                                   HttpServletResponse response,
-//                                   @RequestParam String name,
-//                                   @RequestParam String price){
-//        try {
-//            Product product = new Product();
-//            product.setName(name);
-//            double p = Double.parseDouble(price);
-//            product.setPrice(p);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return new ModelAndView("redirect:/");
+//    public String addProduct(@RequestBody Product product) {
+//        productService.addProduct(product);
+//        return "add Product successfully";
 //    }
 
     @PostMapping("/addProduct")
-    public String addProduct(@RequestBody Product product) {
-        productService.addProduct(product);
+    public String addProduct(@RequestBody ProductParam productParam) {
+        productService.addProduct(productParam);
         return "add Product successfully";
     }
+
 
     @GetMapping("/deleteProduct/{id}")
     public String deleteProduct(@PathVariable("id") int id){
@@ -54,9 +45,9 @@ public class ProductController {
     }
 
     @PutMapping("/updateProduct")
-    public String updateProduct(@RequestBody Product product){
-        System.out.println("contorller uodate pid : " + product.getPid());
-        productService.updateProduct(product);
+    public String updateProduct(@RequestBody ProductParam productParam){
+        System.out.println("contorller uodate pid : " + productParam.getPid());
+        productService.updateProduct(productParam);
         return "update Product successfully";
     }
 

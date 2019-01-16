@@ -22,7 +22,8 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public void updateProduct(Product product) {
-        productDao.save(product);
+        Product product1 = productDao.save(product);
+        System.out.println("ServiceImp update pid: " + product1.getPid());
     }
 
     @Override

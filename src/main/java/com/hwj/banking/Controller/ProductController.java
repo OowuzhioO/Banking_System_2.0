@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,6 +55,7 @@ public class ProductController {
 
     @PutMapping("/updateProduct")
     public String updateProduct(@RequestBody Product product){
+        System.out.println("contorller uodate pid : " + product.getPid());
         productService.updateProduct(product);
         return "update Product successfully";
     }

@@ -5,11 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.persistence.*;
 
 @Entity
-@RequestMapping("/customer")
+@Table(name = "CUSTOMER")
+@SequenceGenerator(name = "customer_SG", allocationSize = 1, initialValue = 1, sequenceName = "customer_sg")
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_SG")
     private int cid;
 
     private String username;
@@ -22,9 +23,9 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String username, String passord, CustomerDetail customerDetail) {
+    public Customer(String username, String password, CustomerDetail customerDetail) {
         this.username = username;
-        this.password = passord;
+        this.password = password;
         this.customerDetail = customerDetail;
     }
 

@@ -27,8 +27,8 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public void updateProduct(ProductParam productParam) {
-        Product product = new Product();
-        product.setPid(productParam.getPid());
+        int targetPid = productParam.getPid();
+        Product product = productDao.findById(targetPid).get();
         product.setName(productParam.getName());
         product.setPrice(productParam.getPrice());
         productDao.save(product);

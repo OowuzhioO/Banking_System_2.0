@@ -66,9 +66,4 @@ public class ProductController {
         System.out.println(product);
         return "query one product successfully!";
     }
-
-    @GetMapping("/test")
-    public String test() {
-        return "this is a test";
-    }
 }

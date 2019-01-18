@@ -36,7 +36,7 @@ public class CustomerParam {
     public CustomerParam(Customer customer, CustomerDetail customerDetail) {
         this.cid = customer.getCid();
         this.username = customer.getUsername();
-        this.password = customer.getPassord();
+        this.password = customer.getPassword();
         this.age = customerDetail.getAge();
         this.email = customerDetail.getEmail();
         this.phone = customerDetail.getPhone();
@@ -60,7 +60,7 @@ public class CustomerParam {
         Customer customer = new Customer();
 //        customer.setCid(this.cid);
         customer.setUsername(this.username);
-        customer.setPassord(this.password);
+        customer.setPassword(this.password);
         return customer;
     }
 

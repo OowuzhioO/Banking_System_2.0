@@ -42,7 +42,7 @@ public class CustomerServiceImp implements CustomerService {
         Customer customer = customerDao.findById(targetCid).get();
         customer.setCid(customerParam.getCid());
         customer.setUsername(customerParam.getUsername());
-        customer.setPassord(customerParam.getPassword());
+        customer.setPassword(customerParam.getPassword());
 
         int targetCdid = customer.getCustomerDetail().getId();
         CustomerDetail customerDetail = customerDetailDao.findById(targetCdid).get();

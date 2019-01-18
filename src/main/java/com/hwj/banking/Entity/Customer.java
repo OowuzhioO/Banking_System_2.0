@@ -3,6 +3,7 @@ package com.hwj.banking.Entity;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "CUSTOMER")
@@ -20,13 +21,19 @@ public class Customer {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private CustomerDetail customerDetail;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
+    private List<Bill> bill;
+
+
+
     public Customer() {
     }
 
-    public Customer(String username, String password, CustomerDetail customerDetail) {
+    public Customer(String username, String password, CustomerDetail customerDetail, List<Bill> bill) {
         this.username = username;
         this.password = password;
         this.customerDetail = customerDetail;
+        this.bill = bill;
     }
 
     public int getCid() {
@@ -45,12 +52,12 @@ public class Customer {
         this.username = username;
     }
 
-    public String getPassord() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassord(String passord) {
-        this.password = passord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public CustomerDetail getCustomerDetail() {
@@ -59,5 +66,13 @@ public class Customer {
 
     public void setCustomerDetail(CustomerDetail customerDetail) {
         this.customerDetail = customerDetail;
+    }
+
+    public List<Bill> getBill() {
+        return bill;
+    }
+
+    public void setBill(List<Bill> bill) {
+        this.bill = bill;
     }
 }

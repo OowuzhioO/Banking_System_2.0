@@ -1,61 +1,59 @@
 package com.hwj.banking.Param;
 
-import com.hwj.banking.Entity.Bill;
-
 import java.util.Date;
 
 public class BillParam {
 
-    private Integer id;
+    private Integer bid;
 
-    private Date date;
+    private Date datetime;
 
-    private String info;
+    private String billInfo;
 
-    private Long balance;
+    private Integer billBalance;
 
     private Integer cid;
 
     public BillParam() {
     }
 
-    public BillParam(Date date, String info, Long balance, Integer cid) {
-        this.date = date;
-        this.info = info;
-        this.balance = balance;
+    public BillParam(Date datetime, String billInfo, Integer billBalance, Integer cid) {
+        this.datetime = datetime;
+        this.billInfo = billInfo;
+        this.billBalance = billBalance;
         this.cid = cid;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getBid() {
+        return bid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBid(Integer bid) {
+        this.bid = bid;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 
-    public String getInfo() {
-        return info;
+    public String getBillInfo() {
+        return billInfo;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setBillInfo(String billInfo) {
+        this.billInfo = billInfo;
     }
 
-    public Long getBalance() {
-        return balance;
+    public Integer getBillBalance() {
+        return billBalance;
     }
 
-    public void setBalance(Long balance) {
-        this.balance = balance;
+    public void setBillBalance(Integer billBalance) {
+        this.billBalance = billBalance;
     }
 
     public Integer getCid() {
@@ -65,5 +63,4 @@ public class BillParam {
     public void setCid(Integer cid) {
         this.cid = cid;
     }
-
 }

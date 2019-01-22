@@ -3,6 +3,7 @@ package com.hwj.banking.Entity;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,15 +15,17 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_SG")
     private int cid;
 
+    @Column(name = "cUsername")
     private String username;
 
+    @Column(name = "cPassword")
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private CustomerDetail customerDetail;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
-    private List<Bill> bill;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer_bill", fetch = FetchType.LAZY)
+    private List<Bill> bill = new ArrayList<>();
 
 
 

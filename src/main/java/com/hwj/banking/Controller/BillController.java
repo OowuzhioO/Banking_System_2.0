@@ -1,9 +1,12 @@
 package com.hwj.banking.Controller;
 
+import com.hwj.banking.Entity.Bill;
 import com.hwj.banking.Param.BillParam;
 import com.hwj.banking.Service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/bill")
@@ -32,19 +35,27 @@ public class BillController {
 
     @GetMapping("/queryBill/{id}")
     public String queryBill(@PathVariable int id){
-        billService.getBill(id);
+        Bill bill = billService.getBill(id);
+        System.out.println(bill);
         return "query bill successfully";
     }
 
-    @GetMapping("/queryBillOfCustomer/{id}")
+    @GetMapping("/queryBillOfCustomer/{cid}")
     public String queryBillsOfCustomer(@PathVariable int cid) {
-        billService.getAllBillsOfCustomer(cid);
+        List<Bill> bills = billService.getAllBillsOfCustomer(cid);
+        for (Bill bill : bills) {
+            System.out.println(bill);
+        }
         return "query bill of customer successfully";
     }
 
     @GetMapping("/queryAllBills")
     public String queryAllBills(){
-        billService.getAllBills();
+        List<Bill> bills =  billService.getAllBills();
+        for (Bill bill : bills) {
+            System.out.println(bill);
+        }
+
         return "query all bills successfully";
     }
 

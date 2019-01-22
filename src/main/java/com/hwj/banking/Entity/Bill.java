@@ -1,5 +1,7 @@
 package com.hwj.banking.Entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,66 +12,79 @@ public class Bill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bill_SG")
-    private int id;
+    @Column(name = "bid")
+    private int bid;
 
-    private Date date;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date datetime;
 
-    private String info;
+    private String billInfo;
 
-    private long balance;
+    private int billBalance;
 
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     @ManyToOne
     @JoinColumn(name = "cid")
-    private Customer customer;
+    private Customer customer_bill;
 
     public Bill() {
     }
 
-    public Bill(Date date, String info, long balance, Customer customer) {
-        this.date = date;
-        this.info = info;
-        this.balance = balance;
-        this.customer = customer;
+    public Bill(Date datetime, String billInfo, int billBalance, Customer customer_bill) {
+        this.datetime = datetime;
+        this.billInfo = billInfo;
+        this.billBalance = billBalance;
+        this.customer_bill = customer_bill;
     }
 
-    public int getId() {
-        return id;
+    public int getBid() {
+        return bid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBid(int bid) {
+        this.bid = bid;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 
-    public String getInfo() {
-        return info;
+    public String getBillInfo() {
+        return billInfo;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setBillInfo(String billInfo) {
+        this.billInfo = billInfo;
     }
 
-    public long getBalance() {
-        return balance;
+    public int getBillBalance() {
+        return billBalance;
     }
 
-    public void setBalance(long balance) {
-        this.balance = balance;
+    public void setBillBalance(int billBalance) {
+        this.billBalance = billBalance;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Customer getCustomer_bill() {
+        return customer_bill;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer_bill(Customer customer_bill) {
+        this.customer_bill = customer_bill;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "bid=" + bid +
+                ", datetime=" + datetime +
+                ", billInfo='" + billInfo + '\'' +
+                ", billBalance=" + billBalance +
+                ", customer_bill=" + customer_bill +
+                '}';
     }
 }

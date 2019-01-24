@@ -1,6 +1,8 @@
 package com.hwj.banking.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,8 +17,10 @@ public class Bill {
     @Column(name = "bid")
     private int bid;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+//    @CreationTimestamp
+//    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date datetime;
 
     private String billInfo;
@@ -25,6 +29,7 @@ public class Bill {
 
     @ManyToOne
     @JoinColumn(name = "cid")
+    @JsonIgnore
     private Customer customer_bill;
 
     public Bill() {

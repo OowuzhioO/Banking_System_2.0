@@ -27,16 +27,20 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer_bill", fetch = FetchType.LAZY)
     private List<Bill> bill = new ArrayList<>();
 
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "customer_loan", fetch = FetchType.LAZY)
+    private List<Loan> loans = new ArrayList<>();
+
 
 
     public Customer() {
     }
 
-    public Customer(String username, String password, CustomerDetail customerDetail, List<Bill> bill) {
+    public Customer(String username, String password, CustomerDetail customerDetail, List<Bill> bill, List<Loan> loans) {
         this.username = username;
         this.password = password;
         this.customerDetail = customerDetail;
         this.bill = bill;
+        this.loans = loans;
     }
 
     public int getCid() {
@@ -77,5 +81,25 @@ public class Customer {
 
     public void setBill(List<Bill> bill) {
         this.bill = bill;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "cid=" + cid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", customerDetail=" + customerDetail +
+                ", bill=" + bill +
+                ", loans=" + loans +
+                '}';
     }
 }

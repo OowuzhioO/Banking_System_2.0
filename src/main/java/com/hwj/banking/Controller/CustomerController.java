@@ -9,6 +9,7 @@ import com.hwj.banking.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,14 +24,16 @@ public class CustomerController {
     CustomerDetailService customerDetailService;
 
     @GetMapping("/queryAllCustomersInfo")
-    public String queryAllCustomersInfo() {
+    public List<CustomerParam> queryAllCustomersInfo() {
         List<Customer> customers = customerService.getAllCustomers();
+        List<CustomerParam> customerParams = new ArrayList<>();
         for (Customer customer : customers) {
             CustomerDetail customerDetail = customer.getCustomerDetail();
             CustomerParam customerParam = new CustomerParam(customer, customerDetail);
             System.out.println(customerParam);
+            customerParams.add(customerParam);
         }
-        return "query all customers info successfully!";
+        return customerParams;
     }
 
     @GetMapping("/queryCustomerInfo/{id}")
@@ -43,7 +46,7 @@ public class CustomerController {
     }
 
     @PostMapping("/addCustomerInfo")
-    public String addCustomerInfo(@RequestBody CustomerParam customerParam){
+    public String addCustomerInfo(CustomerParam customerParam){
         System.out.println(customerParam);
         customerService.addCustomer(customerParam);
         return "add customer successfully";
@@ -55,8 +58,8 @@ public class CustomerController {
         return "delete customer info successfully";
     }
 
-    @PutMapping("/updateCustomerInfo")
-    public String updateCustomerInfo(@RequestBody CustomerParam customerParam) {
+    @PostMapping("/updateCustomerInfo")
+    public String updateCustomerInfo(CustomerParam customerParam) {
         System.out.println("update customer info:" + customerParam.getCid());
         System.out.println("update customer info:" + customerParam.getPassword());
         customerService.updateCustomer(customerParam);

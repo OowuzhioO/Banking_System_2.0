@@ -59,6 +59,8 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     public Optional<Customer> getCustomer(int id) {
 
+        System.out.println("customer id is : " + id);
+
         return customerDao.findById(id);
     }
 

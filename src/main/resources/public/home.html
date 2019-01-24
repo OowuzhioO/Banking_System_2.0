@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1> Customer List </h1>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>username</th>
+                <th>password</th>
+                <th>age</th>
+                <th>email</th>
+                <th>phone</th>
+                <th>remark</th>
+            </tr>
+            </thead>
+
+            <tbody id="customerList">
+
+            </tbody>
+
+        </table>
+
+
+        <div id="test">
+            <button id="btn" onclick="showCustomers()"> query all customer </button>
+        </div>
+
+
+        <script>
+            function showCustomers() {
+                // uname = $("#username").val;
+                $.ajax({
+                    url: "/customer/queryAllCustomersInfo",
+                    type: "get",
+                    dataType:"json",
+                    success: function (data) {
+                        for(var element in data){
+                            customer = data[element];
+                            // console.log(customer);
+                            var template = "<tr> " +
+                                "<td>" +customer.cid+ "</td>" +
+                                "<td>" +customer.username+ "</td>" +
+                                "<td>" +customer.password+ "</td> " +
+                                "<td>" +customer.age+ "</td> " +
+                                "<td>" +customer.email+ "</td> " +
+                                "<td>" +customer.phone+ "</td> " +
+                                "<td>" +customer.remark+ "</td> " +
+                                "<td><button id='updCustomer' onclick='updCustomer(" + customer.cid + ")'> update </button></td>" +
+                                "<td><button id='delCustomer' onclick='delCustomer(" + customer.cid + ")'> delete </button></td>" +
+                                "<td><button id='queryBillsOfCustomer' onclick='queryBillsOfCustomer(" + customer.cid + ")'> bills </button></td>" +
+                                "</tr>";
+                            console.log("this is a customer test");
+                            console.log(typeof customer);
+                            $("#customerList").append(template);
+                        }
+                    }
+                });
+            }
+
+            function updCustomer(cid) {
+                location.href = "/updCustomer.html?cid=" + cid;
+            }
+
+            function delCustomer(cid) {
+                location.href = "/customer/deleteCustomerInfo/" + cid;
+            }
+
+            function queryBillsOfCustomer(cid) {
+                location.href = "/customerBill.html?cid=" + cid;
+            }
+        </script>
+
+    </div>
+</body>
+</html>

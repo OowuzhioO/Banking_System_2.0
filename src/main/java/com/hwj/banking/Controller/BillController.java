@@ -1,11 +1,14 @@
 package com.hwj.banking.Controller;
 
 import com.hwj.banking.Entity.Bill;
+import com.hwj.banking.Entity.Customer;
 import com.hwj.banking.Param.BillParam;
 import com.hwj.banking.Service.BillService;
+import com.hwj.banking.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,9 +18,16 @@ public class BillController {
     @Autowired
     BillService billService;
 
-    @PostMapping("/addBill")
-    public String addBill(@RequestBody BillParam billParam){
-        billService.addBill(billParam);
+    @Autowired
+    CustomerService customerService;
+
+    @PostMapping("/addBill/{cid}")
+    public String addBill(@PathVariable int cid, Bill bill){
+        Customer customer = customerService.getCustomer(cid).get();
+//        System.out.println("add bill set up customer:" + customer);
+        System.out.println("add bill set up bill:" + bill);
+        bill.setCustomer_bill(customer);
+        billService.addBill(bill);
         return "add BIll successfully";
     }
 
@@ -28,8 +38,8 @@ public class BillController {
     }
 
     @PutMapping("/updateBill")
-    public String updateBill(@RequestBody BillParam billParam){
-        billService.updateBill(billParam);
+    public String updateBill(@RequestBody Bill bill){
+        billService.updateBill(bill);
         return "update BIll successfully";
     }
 
@@ -41,12 +51,19 @@ public class BillController {
     }
 
     @GetMapping("/queryBillOfCustomer/{cid}")
-    public String queryBillsOfCustomer(@PathVariable int cid) {
+    public List<Bill> queryBillsOfCustomer(@PathVariable int cid) {
+//        System.out.println("cid in bill:" + cid);
         List<Bill> bills = billService.getAllBillsOfCustomer(cid);
-        for (Bill bill : bills) {
-            System.out.println(bill);
+//        System.out.println("================================" + bills.size());
+//        for (Bill bill : bills) {
+//            System.out.println("+++++++" + bill);
+//        }
+        List<Bill> billList = new ArrayList<>();
+        for (Bill bill : bills){
+            billList.add(bill);
         }
-        return "query bill of customer successfully";
+        return billList;
+//        return new ArrayList<>();
     }
 
     @GetMapping("/queryAllBills")

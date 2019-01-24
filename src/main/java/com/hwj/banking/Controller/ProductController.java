@@ -1,5 +1,7 @@
 package com.hwj.banking.Controller;
 
+import ch.qos.logback.core.net.ObjectWriter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hwj.banking.Entity.Product;
 import com.hwj.banking.Param.ProductParam;
 import com.hwj.banking.Service.ProductService;
@@ -52,12 +54,14 @@ public class ProductController {
     }
 
     @GetMapping("/queryAllProduct")
-    public String queryAllProduct(){
+    public List<Product> queryAllProduct(){
         List<Product> products = productService.getAllProduct();
         for (Product product : products) {
             System.out.println(product);
         }
-        return "query all products successfully!";
+        System.out.println(products.size());
+
+        return products;
     }
 
     @GetMapping("/queryProduct/{id}")

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BillServiceImp implements BillService {
@@ -22,20 +23,25 @@ public class BillServiceImp implements BillService {
     BillDao billDao;
 
     @Override
-    public void addBill(BillParam billParam) {
-        int cid = billParam.getCid();
-        Customer customer = customerDao.findById(cid).get();
-        Bill bill = new Bill();
-        System.out.println("before add bill date time: " + billParam.getDatetime());
-        bill.setDatetime(billParam.getDatetime());
-        System.out.println("after add bill date time: " + bill.getDatetime());
-        bill.setBillInfo(billParam.getBillInfo());
-        bill.setBillBalance(billParam.getBillBalance());
-        List<Bill> billList = customer.getBill();
-        billList.add(bill);
-        customer.setBill(billList);
-        bill.setCustomer_bill(customer);
-        customerDao.save(customer);
+    public void addBill(Bill bill) {
+//        int cid = bill.getCid();
+//        Customer customer = customerDao.findById(cid).get();
+//        Bill bill = new Bill();
+//        System.out.println("before add bill date time: " + billParam.getDatetime());
+//        bill.setDatetime(billParam.getDatetime());
+//        System.out.println("after add bill date time: " + bill.getDatetime());
+//        bill.setBillInfo(billParam.getBillInfo());
+//        bill.setBillBalance(billParam.getBillBalance());
+//        List<Bill> billList = customer.getBill();
+//        billList.add(bill);
+//        customer.setBill(billList);
+//        bill.setCustomer_bill(customer);
+//        customerDao.save(customer);
+
+//        Customer customer = bill.getCustomer_bill();
+//        customer.getBill().add(bill);
+//        customerDao.save(customer);
+        billDao.save(bill);
     }
 
     @Override
@@ -44,15 +50,15 @@ public class BillServiceImp implements BillService {
     }
 
     @Override
-    public void updateBill(BillParam billParam) {
-        int bid = billParam.getBid();
-        Bill bill = billDao.findById(bid).get();
-        System.out.println("before update bill date time: billParam:  " + billParam.getDatetime());
-        System.out.println("before update bill date time: bill: " + bill.getDatetime());
-        bill.setDatetime(billParam.getDatetime());
-        System.out.println("after update bill date time: bill" + bill.getDatetime());
-        bill.setBillInfo(billParam.getBillInfo());
-        bill.setBillBalance(billParam.getBillBalance());
+    public void updateBill(Bill bill) {
+//        int bid = billParam.getBid();
+//        Bill bill = billDao.findById(bid).get();
+//        System.out.println("before update bill date time: billParam:  " + billParam.getDatetime());
+//        System.out.println("before update bill date time: bill: " + bill.getDatetime());
+//        bill.setDatetime(billParam.getDatetime());
+//        System.out.println("after update bill date time: bill" + bill.getDatetime());
+//        bill.setBillInfo(billParam.getBillInfo());
+//        bill.setBillBalance(billParam.getBillBalance());
         billDao.save(bill);
     }
 
@@ -70,8 +76,13 @@ public class BillServiceImp implements BillService {
 
     @Override
     public List<Bill> getAllBillsOfCustomer(int cid) {
+        System.out.println("the customer cid is : ===========" + cid);
+//        Optional<Customer> customer = customerDao.findById(cid);
         Customer customer = customerDao.findById(cid).get();
+//        System.out.println("bill of customer:" + customer);
         List<Bill> bills = customer.getBill();
         return bills;
+//        return new ArrayList<>();
+
     }
 }

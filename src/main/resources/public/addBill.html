@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>update page</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<form action="" name="billForm" method="post">
+    <!--bid: <input type="number" name="bid" placeholder="bid"> <br>-->
+    datetime: <input type="date" name="datetime" > <br>
+    billInfo: <input type="text" name="billInfo" placeholder="bill infomation"> <br>
+    billBalance: <input type="number" name="billBalance" placeholder="bill balance"> <br>
+    <!--<input type="number" name="cid">-->
+    <input type="submit" value="OK" onclick="set_form_action()">
+</form>
+
+<script>
+    var thisURL = document.URL;
+    var url = new URL(thisURL);
+    var cid = url.searchParams.get("cid");
+    // document.getElementById('cid').value = cidValue;
+    // document.getElementById('billForm').setAttribute('action', "/bill/addBill/" + cidValue);
+    // $("#billForm").setAttribute('action', "/bill/addBill/" + cid);
+    // $("#billForm").action("/bill/addBill/" + cid);
+
+    function set_form_action() {
+        billForm.action = "/bill/addBill/" + cid;
+        billForm.submit();
+    }
+
+</script>
+
+</body>
+</html>

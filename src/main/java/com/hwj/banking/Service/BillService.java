@@ -6,9 +6,9 @@ import com.hwj.banking.Param.BillParam;
 import java.util.List;
 
 public interface BillService {
-    void addBill(BillParam billParam);
+    void addBill(Bill bill);
     void deleteBill(int id);
-    void updateBill(BillParam billParam);
+    void updateBill(Bill bill);
     Bill getBill(int id);
     List<Bill> getAllBills();
     List<Bill> getAllBillsOfCustomer(int cid);

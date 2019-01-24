@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>update page</title>
+</head>
+<body>
+
+<!--<form action="/product/addProduct" method="post">-->
+<!--name: <input type="text" name="name" placeholder="Product Name"> <br>-->
+<!--price: <input type="text" name="price" placeholder="Product Price"> <br>-->
+<!--<input type="submit" value="OK">-->
+<!--</form>-->
+
+<form action="/customer/updateCustomerInfo" method="post">
+    cid: <input type="number" name="cid" id="cid" placeholder="{cid}"> <br>
+    username: <input type="text" name="username" placeholder="username"> <br>
+    password: <input type="text" name="password" placeholder="password"> <br>
+    age: <input type="number" name="age" placeholder="age"> <br>
+    email: <input type="email" name="email" placeholder="email"> <br>
+    phone: <input type="number" name="phone" placeholder="phone"> <br>
+    remark: <input type="text" name="remark" placeholder="remark"> <br>
+    <input type="submit" value="OK">
+</form>
+
+<script>
+    var thisURL = document.URL;
+    // console.log("this url is ---------" + thisURL);
+    var url = new URL(thisURL);
+    var cid = url.searchParams.get("cid");
+    // console.log("the customer cid is------------ :" + cid);
+    document.getElementById('cid').value = cid;
+    // document.getElementById('cid').innerText(cidValue);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up page</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div id="container">
+        <h1>Customer Bills</h1>
+        <button id="addBillBtn" > add bill</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>bid</th>
+                    <th>datetime</th>
+                    <th>bill Info</th>
+                    <th>bill balance</th>
+                </tr>
+            </thead>
+            <tbody id="billList">
+
+            </tbody>
+        </table>
+
+
+
+
+
+    </div>
+
+
+    <script>
+        var thisURL = document.URL;
+        var url = new URL(thisURL);
+        var cid = url.searchParams.get("cid");
+
+
+        (function () {
+            // alert("hello");
+           $.ajax({
+              url: "/bill/queryBillOfCustomer/" + cid,
+              type: "get",
+              dataType: "json",
+              success: function (data) {
+                  for (var element in data) {
+                      billParam = data[element];
+                      // console.log(bill);
+                      var template = "<tr>" +
+                              "<td>" + billParam.bid + "</td>" +
+                              "<td>" + billParam.datetime + "</td>" +
+                              "<td>" + billParam.billInfo + "</td>" +
+                              "<td>" + billParam.billBalance + "</td>" +
+                              
+                              "</tr>"
+                      $("#billList").append(template);
+                  }
+              }
+           });
+        })();
+
+        $("#addBillBtn").click(function () {
+            location.href = "/addBill.html?cid=" + cid;
+        });
+    </script>
+
+</body>
+</html>

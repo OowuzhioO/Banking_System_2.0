@@ -58,6 +58,7 @@
                                 "<td><button id='updCustomer' onclick='updCustomer(" + customer.cid + ")'> update </button></td>" +
                                 "<td><button id='delCustomer' onclick='delCustomer(" + customer.cid + ")'> delete </button></td>" +
                                 "<td><button id='queryBillsOfCustomer' onclick='queryBillsOfCustomer(" + customer.cid + ")'> bills </button></td>" +
+                                "<td><button id='queryLoanOfCustomer' onclick='queryLoanOfCustomer("+ customer.cid +")'> loans</button></td>" +
                                 "</tr>";
                             console.log("this is a customer test");
                             console.log(typeof customer);
@@ -77,6 +78,10 @@
 
             function queryBillsOfCustomer(cid) {
                 location.href = "/customerBill.html?cid=" + cid;
+            }
+
+            function queryLoanOfCustomer(cid) {
+                location.href = "/customerLoan.html?cid=" + cid;
             }
         </script>
 

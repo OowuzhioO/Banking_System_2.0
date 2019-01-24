@@ -1,10 +1,16 @@
 package com.hwj.banking.Controller;
 
+import com.hwj.banking.Dao.CustomerDao;
+import com.hwj.banking.Dao.LoanDao;
+import com.hwj.banking.Entity.Customer;
 import com.hwj.banking.Entity.Loan;
 import com.hwj.banking.Param.LoanParam;
+import com.hwj.banking.Service.CustomerService;
 import com.hwj.banking.Service.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/loan")
@@ -13,8 +19,19 @@ public class LoanController {
     @Autowired
     private LoanService loanService;
 
-    @PostMapping("/addLoan")
-    public String addLoan(@RequestBody Loan loan){
+    @Autowired
+    private CustomerService customerService;
+
+    @PostMapping("/addLoan/{cid}")
+    public String addLoan(@PathVariable int cid, Loan loan){
+        System.out.println("cid ---------" + cid);
+        System.out.println("loan--------------" + loan);
+        Customer customer = customerService.getCustomer(cid).get();
+//        List<Loan> loanList = customer.getLoans();
+//        loanList.add(loan);
+//        loan.setCustomer_loan(customer);
+        List<Customer> customerList = loan.getCustomer_loan();
+        customerList.add(customer);
         loanService.addLoan(loan);
         return "add Loan successfully";
     }
@@ -25,8 +42,14 @@ public class LoanController {
         return "delete Loan successfully";
     }
 
-    @PutMapping("/updateLoan")
-    public String updateLoan(@RequestBody Loan loan) {
+    @PostMapping("/updateLoan")
+    public String updateLoan(Loan loan) {
+//        loan.setId(lid);
+
+        int lid = loan.getId();
+        Loan oldLoan = loanService.getLoan(lid);
+        List<Customer> customerList = oldLoan.getCustomer_loan();
+        loan.setCustomer_loan(customerList);
         loanService.updateLoan(loan);
         return "update loan successfully";
     }
@@ -45,9 +68,9 @@ public class LoanController {
     }
 
     @GetMapping("/queryLoanOfCustomer/{cid}")
-    public String queryLoanOfCustomer(@PathVariable int cid){
-        loanService.getLoanOfCustomer(cid);
-        return  "query loan of customer successfully";
+    public List<Loan> queryLoanOfCustomer(@PathVariable int cid){
+        List<Loan> loans = loanService.getLoanOfCustomer(cid);
+        return  loans;
     }
 }
 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan page</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="container">
+    <h1>Customer Loans</h1>
+    <button id="addLoanBtn" > add loan</button>
+
+    <table>
+        <thead>
+        <tr>
+            <th>lid</th>
+            <th>loan balance</th>
+            <th>remark</th>
+        </tr>
+        </thead>
+        <tbody id="loanList">
+
+        </tbody>
+    </table>
+
+
+
+
+
+</div>
+
+
+<script>
+    var thisURL = document.URL;
+    var url = new URL(thisURL);
+    var cid = url.searchParams.get("cid");
+
+
+    (function () {
+        // alert("hello");
+        $.ajax({
+            url: "/loan/queryLoanOfCustomer/" + cid,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                for (var element in data) {
+                    loanParam = data[element];
+                    // console.log(bill);
+                    var template = "<tr>" +
+                        "<td>" + loanParam.id + "</td>" +
+                        "<td>" + loanParam.balance + "</td>" +
+                        "<td>" + loanParam.remark + "</td>" +
+                        "<td><button id='delLoan' onclick='delLoan(" + loanParam.id + ")'>delete loan</button></td>" +
+                        "<td><button id='updLoan' onclick='updLoan(" + loanParam.id + ")'>update loan</button></td>" +
+                        // "<td><button id='showCustomers' onclick='showCustomers(" + loanParam.id + ")'>customers own this bill</button></td>"
+                        "</tr>";
+                    $("#loanList").append(template);
+                }
+            }
+        });
+    })();
+
+    $("#addLoanBtn").click(function () {
+        location.href = "/addLoan.html?cid=" + cid;
+    });
+
+    function delLoan(lid) {
+        location.href = "/loan/deleteLoan/" + lid;
+    }
+
+    function updLoan(lid) {
+        location.href = "/updLoan.html?lid=" + lid;
+    }
+
+    // function showCustomers(lid) {
+    //     $.ajax({
+    //         url: "/"
+    //     });
+    // }
+</script>
+
+</body>
+</html>

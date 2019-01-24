@@ -35,11 +35,11 @@ public class LoanServiceImp implements LoanService {
 //        List<Customer> customers = loan.getCustomer_loan();
 
 //        customerDao.save(customer);
-        System.out.println("the loan is ---------" + loan);
+//        System.out.println("the loan is ---------" + loan);
         List<Customer> customers = loan.getCustomer_loan();
-        for (Customer customer : customers) {
-            System.out.println(customer);
-        }
+//        for (Customer customer : customers) {
+//            System.out.println(customer);
+//        }
 //        System.out.println(loan.getCustomer_loan());
         loanDao.save(loan);
     }

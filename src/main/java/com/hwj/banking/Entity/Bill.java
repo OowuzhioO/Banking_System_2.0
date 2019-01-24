@@ -27,7 +27,7 @@ public class Bill {
 
     private int billBalance;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "cid")
     @JsonIgnore
     private Customer customer_bill;

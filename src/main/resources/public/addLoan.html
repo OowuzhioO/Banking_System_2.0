@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>update page</title>
+    <title>add Loan page</title>
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -10,12 +10,11 @@
 </head>
 <body>
 
-<form action="" name="billForm" method="post">
+<form action="" name="loanForm" method="post">
     <!--bid: <input type="number" name="bid" placeholder="bid"> <br>-->
-    datetime: <input type="date" name="datetime" > <br>
-    billInfo: <input type="text" name="billInfo" placeholder="bill infomation"> <br>
-    billBalance: <input type="number" name="billBalance" placeholder="bill balance"> <br>
-    <!--<input type="number" name="cid">-->
+
+    loanBalance: <input type="number" name="balance" placeholder="loan balance"> <br>
+    remark: <input type="text" name="remark" placeholder="loan remark"> <br>
     <input type="submit" value="OK" onclick="set_form_action()">
 </form>
 
@@ -25,8 +24,8 @@
     var cid = url.searchParams.get("cid");
 
     function set_form_action() {
-        billForm.action = "/bill/addBill/" + cid;
-        billForm.submit();
+        loanForm.action = "/loan/addLoan/" + cid;
+        loanForm.submit();
     }
 
 </script>

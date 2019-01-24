@@ -1,5 +1,7 @@
 package com.hwj.banking.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,9 @@ public class Loan {
     @Column(name = "lRemark")
     private String remark;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "Loan_Customer", joinColumns = {@JoinColumn(name = "lid")}, inverseJoinColumns = {@JoinColumn(name = "cid")})
+    @JsonIgnore
     private List<Customer> customer_loan = new ArrayList<>();
 
 

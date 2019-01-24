@@ -1,5 +1,6 @@
 package com.hwj.banking.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
@@ -22,12 +23,21 @@ public class Customer {
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
+    @JsonIgnore
     private CustomerDetail customerDetail;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer_bill", fetch = FetchType.LAZY)
+    @OneToMany(cascade = {
+            CascadeType.REMOVE,
+            CascadeType.MERGE
+    }, mappedBy = "customer_bill", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Bill> bill = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "customer_loan", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {
+            CascadeType.MERGE,
+            CascadeType.REMOVE
+    }, mappedBy = "customer_loan", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Loan> loans = new ArrayList<>();
 
 

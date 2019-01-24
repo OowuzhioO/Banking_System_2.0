@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>update page</title>
+</head>
+<body>
+
+<form action="/loan/updateLoan" name="loanForm" method="post">
+    lid: <input type="number" id="lid" name="id" placeholder="lid"> <br>
+    loanBalance: <input type="number" name="balance" placeholder="loan balance"> <br>
+    remark: <input type="text" name="remark" placeholder="loan remark"> <br>
+    <input type="submit" value="OK" onclick="set_form_action()">
+</form>
+
+<script>
+    var thisURL = document.URL;
+    var url = new URL(thisURL);
+    var lid = url.searchParams.get("lid");
+    // console.log("--------------" + lid);
+    document.getElementById('lid').value = lid;
+</script>
+
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.hwj.banking.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
@@ -22,8 +23,9 @@ public class CustomerDetail {
 
     private String remark;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "cid")
+    @JsonIgnore
     private Customer customer;
 
     public CustomerDetail() {

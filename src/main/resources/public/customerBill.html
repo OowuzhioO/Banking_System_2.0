@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign up page</title>
+    <title>Bill page</title>
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -56,8 +56,8 @@
                               "<td>" + billParam.datetime + "</td>" +
                               "<td>" + billParam.billInfo + "</td>" +
                               "<td>" + billParam.billBalance + "</td>" +
-                              
-                              "</tr>"
+                              "<td><button id='delBill' onclick='delBill(" + billParam.bid + ")'>delete bill</button></td>" +
+                              "</tr>";
                       $("#billList").append(template);
                   }
               }
@@ -67,6 +67,10 @@
         $("#addBillBtn").click(function () {
             location.href = "/addBill.html?cid=" + cid;
         });
+
+        function delBill(bid) {
+            location.href = "/bill/deleteBill/" + bid;
+        }
     </script>
 
 </body>

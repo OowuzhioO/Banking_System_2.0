@@ -12,4 +12,5 @@ public interface CustomerService {
     void updateCustomer(CustomerParam customerParam);
     Optional<Customer> getCustomer(int id);
     List<Customer> getAllCustomers();
+    Optional<Customer> findCustomerByUsername(String username);
 }

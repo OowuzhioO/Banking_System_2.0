@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/customer")
+//@RequestMapping(value = "/customer")
 public class CustomerController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class CustomerController {
     @Autowired
     CustomerDetailService customerDetailService;
 
-    @GetMapping("/queryAllCustomersInfo")
+    @GetMapping("/customer/queryAllCustomersInfo")
     public List<CustomerParam> queryAllCustomersInfo() {
         List<Customer> customers = customerService.getAllCustomers();
         List<CustomerParam> customerParams = new ArrayList<>();
@@ -36,7 +36,7 @@ public class CustomerController {
         return customerParams;
     }
 
-    @GetMapping("/queryCustomerInfo/{id}")
+    @GetMapping("/customer/queryCustomerInfo/{id}")
     public String queryCustomerInfo(@PathVariable int id){
         Customer customer = customerService.getCustomer(id).get();
         CustomerDetail customerDetail = customer.getCustomerDetail();
@@ -52,13 +52,13 @@ public class CustomerController {
         return "add customer successfully";
     }
 
-    @GetMapping("/deleteCustomerInfo/{id}")
+    @GetMapping("/customer/deleteCustomerInfo/{id}")
     public String deleteCustomerInfo(@PathVariable int id) {
         customerService.deleteCustomer(id);
         return "delete customer info successfully";
     }
 
-    @PostMapping("/updateCustomerInfo")
+    @PostMapping("/customer/updateCustomerInfo")
     public String updateCustomerInfo(CustomerParam customerParam) {
         System.out.println("update customer info:" + customerParam.getCid());
         System.out.println("update customer info:" + customerParam.getPassword());
